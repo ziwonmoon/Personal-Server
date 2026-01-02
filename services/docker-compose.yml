@@ -92,7 +92,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       password: '12345678'
     volumes:
-      - ./mysql_db:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     networks:
       - default
 
