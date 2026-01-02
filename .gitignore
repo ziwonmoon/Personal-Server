@@ -1,0 +1,29 @@
+.DS_Store
+.env
+
+#미디어 파일
+*/media/*
+
+#데이터파일 (전체 백업할때 살려내)
+*/data/*
+
+#로그파일
+*/logs/*
+*.log
+
+#페일투밴은 .local 설정파일만 살림
+/infra/config/fail2ban/**/*
+!/infra/config/fail2ban/**/
+!/infra/config/fail2ban/**/*.local
+
+#Nginx Proxy Manager는 DB로 관리되므로 깃 추적은 크게 의미 없음
+/infra/config/nginx/*
+
+#Jellyfin 설정은 웹 인터페이스로 하므로 깃 추적 제외
+/services/config/jellyfin/*
+
+#mainpage config는 웹사이트 정적파일임
+/services/config/mainpage/*
+
+#metube 쿠키는 당연히 민감정보이므로 제외
+/services/config/metube/cookies/*

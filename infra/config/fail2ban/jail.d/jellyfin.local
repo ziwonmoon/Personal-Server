@@ -1,0 +1,9 @@
+[jellyfin]
+enabled = true
+filter = jellyfin
+logpath = %(logs_path)s/jellyfin/log_*.log
+maxretry = 10
+bantime = 1440m
+findtime = 600m 
+maxmatches = 1
+action = iptables-allports[name=jellyfin, chain=FORWARD]

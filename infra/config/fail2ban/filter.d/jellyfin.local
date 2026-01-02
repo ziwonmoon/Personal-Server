@@ -1,0 +1,5 @@
+[Definition]
+# 타임존 부분([+-]09:00)을 %%H:%%M 대신 \d{2}:\d{2} (숫자:숫자)로 변경
+datepattern = ^\[%%Y-%%m-%%d %%H:%%M:%%S\.%%f\s*[+-]\d{2}:\d{2}\]
+
+failregex = ^.*Authentication request for .* has been denied \(IP: "<HOST>"\)

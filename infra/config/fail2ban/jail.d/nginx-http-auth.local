@@ -1,0 +1,12 @@
+
+[nginx-http-auth]
+
+enabled = true
+filter = nginx-http-auth
+port    = http,https
+logpath = %(nginx_error_log)s
+maxretry = 10
+bantime  = 1440m
+findtime = 600m
+maxmatches = 1
+action = iptables-allports[name=nginx-http-auth, chain=FORWARD]

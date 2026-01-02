@@ -1,0 +1,64 @@
+services:
+  nginx:
+    image: 'jc21/nginx-proxy-manager:2.13.5'
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./config/nginx:/data
+      - ./config/nginx/letsencrypt:/etc/letsencrypt
+      - ./logs/nginx:/data/logs
+    environment:
+      - PUID=1001
+      - PGID=1001
+    # Do not set Timezone here, it causes issues with NPM
+    networks:
+      - default
+
+
+
+  fail2ban:
+    image: linuxserver/fail2ban:1.1.0
+    restart: unless-stopped
+    container_name: fail2ban
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    network_mode: host
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Asia/Seoul
+    volumes:
+      - ./config/fail2ban:/config/fail2ban
+      - ./logs/fail2ban:/config/log
+      - /var/log:/var/log:ro
+      - ./config/jellyfin/config/log:/remotelogs/jellyfin:ro
+      - ./config/nginx/data/logs:/remotelogs/nginx:ro
+      - ./config/filebrowser/settings:/remotelogs/filebrowser:ro
+    networks:
+      - default
+
+
+
+  watchtower:
+    image: containrrr/watchtower:1.7.1
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Asia/Seoul
+      - WATCHTOWER_LABEL_ENABLE=true
+    networks:
+      - default
+
+
+
+networks:
+  default:
+    name: ${DOCKER_NETWORK_NAME}
+    external: true
