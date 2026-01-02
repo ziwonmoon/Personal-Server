@@ -4,6 +4,8 @@ Jellyfin, Metube, FileBrowser, Nginx Proxy Manager, Fail2Ban 종합선물세트
 
 1. create .env by .env.example
 2. create symbolic link of .env for /infra and /services
+3. `docker network create mynetwork`
+4. `make up`
 
 
 
