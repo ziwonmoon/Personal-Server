@@ -27,6 +27,7 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
+    network_mode: host
     environment:
       - PUID=1001
       - PGID=1001
@@ -38,8 +39,6 @@ services:
       - ./config/jellyfin/config/log:/remotelogs/jellyfin:ro
       - ./config/nginx/data/logs:/remotelogs/nginx:ro
       - ./config/filebrowser/settings:/remotelogs/filebrowser:ro
-    networks:
-      - default
 
 
 
